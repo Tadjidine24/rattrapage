@@ -1,0 +1,86 @@
+/*GENERAL*/
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+body {
+  background-image: url('img/online_dating.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+label, p {
+font-size: 12px;
+  font-family: 'Syncopate', sans-serif;
+  /*display: grid;*/
+}
+
+
+h1 {
+  font-family: 'Fascinate Inline', cursive;
+  color: #0033cc;
+  text-align: center;
+  font-size: 80px;
+  padding: 2px;
+  margin: 2px;
+  font-weight: normal;
+}
+
+input{
+  cursor: pointer;
+  /*display: grid;
+  /*float: right;*/
+}
+
+/*FORMULAIRE*/
+
+/*GENERAL FORMULAIRE*/
+
+  .formulaire {
+    opacity: 0.9;
+    width: 20%;
+    border: double 10px #ff3333;
+    border-radius: 10px;
+    top: 30%;
+    left: 30%;
+    color: #ffffff;
+    background-color: #ff6666;
+    font-size: 25px;
+    box-shadow: 5px 0px 15px white;
+    margin: 0 auto;
+  }
+
+/*input*/
+  .form-text{
+    width: 150px;
+  }
+  .bleu{
+    border: dotted 2px blue;
+  }
+
+/*button*/
+  .registrationbtn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center; 
+  }
+
+  .form {
+    width: 100%;
+    margin-top: 2%;
+    margin: 0 auto;
+  }
+
+  .btn{
+    cursor: pointer;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #ff3333;
+    border: double 10px #66ccff;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 5px 0px 15px black;
+  }

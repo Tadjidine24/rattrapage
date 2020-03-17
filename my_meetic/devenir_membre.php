@@ -1,22 +1,22 @@
 <?php
 
-require 'connexion.php';
+require 'connect.php';
 
 class inscription
 {
-    private $surname;
-    private $name;
-    private $naissance;
+    private $prenom;
+    private $nom;
+    private $date;
     private $sexe;
     private $ville;
     private $mail;
     private $password;
 
-    public function __construct($surname, $name, $naissance, $sexe, $ville, $mail, $password)
+    public function __construct($prenom, $nom, $date, $sexe, $ville, $mail, $password)
     {
-        $this->surname = $surname;
-        $this->name = $name;
-        $this->naissance = $naissance;
+        $this->prenom = $prenom;
+        $this->nom = $nom;
+        $this->date = $date;
         $this->sexe = $sexe;
         $this->ville = $ville;
         $this->mail = $mail;
@@ -43,35 +43,35 @@ class inscription
         $this->password = $password;
     }
 
-    public function getName()
+    public function getnom()
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName($name)
+    public function setnom($nom)
     {
-        $this->name = $name;
+        $this->nom = $nom;
     }
 
 
-    public function getSurname()
+    public function getprenom()
     {
-        return $this->surname;
+        return $this->prenom;
     }
 
-    public function setSurname($surname)
+    public function setprenom($prenom)
     {
-        $this->surname = $surname;
+        $this->prenom = $prenom;
     }
 
-    public function getNaissance()
+    public function getdate()
     {
-        return $this->naissance;
+        return $this->date;
     }
 
-    public function setNaissance($naissance)
+    public function setdate($date)
     {
-        $this->naissance = $naissance;
+        $this->date = $date;
     }
 
     public function getSexe()
@@ -96,37 +96,37 @@ class inscription
 
     public function insertInto()
     {
-        $this->surname = preg_replace("# +#", "", $this->surname);
-        $this->name = preg_replace("# +#", "", $this->name);
-        $this->naissance = preg_replace("# +#", "", $this->naissance);
+        $this->prenom = preg_replace("# +#", "", $this->prenom);
+        $this->nom = preg_replace("# +#", "", $this->nom);
+        $this->date = preg_replace("# +#", "", $this->date);
         $this->ville = preg_replace("# +#", "", $this->ville);
         $this->mail = preg_replace("# +#", "", $this->mail);
 
-        $this->surname = strip_tags(trim($this->surname));
-        $this->name = strip_tags(trim($this->name));
-        $this->naissance = strip_tags(trim($this->naissance));
+        $this->prenom = strip_tags(trim($this->prenom));
+        $this->nom = strip_tags(trim($this->nom));
+        $this->date = strip_tags(trim($this->date));
         $this->ville = strip_tags(trim($this->ville));
         if (
-            isset($this->surname) && isset($this->name) && isset($this->naissance) && isset($this->sexe)
+            isset($this->prenom) && isset($this->nom) && isset($this->date) && isset($this->sexe)
             && isset($this->ville) && isset($this->mail) && isset($this->password)
         ) {
             if (
-                $this->surname != null && $this->name != null && $this->naissance != null && $this->sexe != null
+                $this->prenom != null && $this->nom != null && $this->date != null && $this->sexe != null
                 && $this->ville != null && $this->mail != null && $this->password != null
             ) {
-                $verif_email = $GLOBALS['bdd']->prepare("SELECT email FROM membre WHERE email=:mail");
+                $verif_email = $GLOBALS['conn']->prepare("SELECT email FROM membre WHERE email=:mail");
                 $verif_email->bindParam(":mail", $this->mail, PDO::PARAM_STR);
                 $verif_email->execute();
                 $verification = $verif_email->fetchAll();
                 if ($verification == null) {
-                    $sql = $GLOBALS['bdd']->prepare("INSERT INTO membre (nom, prenom, date_naissance, sexe, ville,
+                    $sql = $GLOBALS['conn']->prepare("INSERT INTO membre (nom, prenom, date_naissance, sexe, ville,
                     email, password) values(?, ?, ?, ?, ?, ?, ?)");
                     $sql->execute(array(
-                        $this->surname, $this->name, $this->naissance, $this->sexe, $this->ville,
+                        $this->prenom, $this->nom, $this->date, $this->sexe, $this->ville,
                         $this->mail, $this->password
                     ));
                     $sql->closeCursor();
-                    $query = $GLOBALS['bdd']->prepare("SELECT DATEDIFF(DATE(NOW()),membre.date_naissance) AS 'age' FROM membre 
+                    $query = $GLOBALS['conn']->prepare("SELECT DATEDIFF(DATE(NOW()),membre.date_naissance) AS 'age' FROM membre 
                       WHERE email=:mail");
                     $query->bindParam(":mail", $this->mail, PDO::PARAM_STR);
                     $query->execute();
@@ -134,13 +134,13 @@ class inscription
                     $majeur = floor(intval($age[0]['age']) / 365);
 
                     if ($majeur >= 18) {
-                        $requet_sql_on = $GLOBALS['bdd']->prepare("UPDATE membre set statue='on' where email=:email");
+                        $requet_sql_on = $GLOBALS['conn']->prepare("UPDATE membre set statue='on' where email=:email");
                         $requet_sql_on->bindParam(":email", $this->mail, PDO::PARAM_STR);
                         $requet_sql_on->execute();
                         $requet_sql_on->closeCursor();
                         echo "Inscription réussis avec succés.";
                     } elseif ($majeur < 18) {
-                        $requet_sql_off = $GLOBALS['bdd']->prepare("UPDATE membre set statue='of' where email=:email");
+                        $requet_sql_off = $GLOBALS['conn']->prepare("UPDATE membre set statue='of' where email=:email");
                         $requet_sql_off->bindParam(":email", $this->mail, PDO::PARAM_STR);
                         $requet_sql_off->execute();
                         $requet_sql_off->closeCursor();
@@ -193,17 +193,17 @@ class connexion
     {
         if (isset($this->mail) && isset($this->password)) {
             if ($this->mail != null && $this->password != null) {
-                $mot_de_passe = $GLOBALS['bdd']->prepare("SELECT password FROM membre WHERE email=:mail");
+                $mot_de_passe = $GLOBALS['conn']->prepare("SELECT password FROM membre WHERE email=:mail");
                 $mot_de_passe->bindParam(":mail", $this->mail, PDO::PARAM_STR);
                 $mot_de_passe->execute();
                 $passe = $mot_de_passe->fetch();
                 if (password_verify($this->password, $passe['password'])) {
-                    $requet_sql = $GLOBALS['bdd']->prepare("SELECT * FROM membre WHERE statue=\"on\" and email=:mail");
+                    $requet_sql = $GLOBALS['conn']->prepare("SELECT * FROM membre WHERE statue=\"on\" and email=:mail");
                     $requet_sql->bindParam(":mail", $this->mail, PDO::PARAM_STR);
                     $requet_sql->execute();
                     $requet = $requet_sql->fetchAll();
                     if ($requet != null) {
-                        $del = $GLOBALS['bdd']->prepare("SELECT compte_supprimer FROM membre WHERE email=:email");
+                        $del = $GLOBALS['conn']->prepare("SELECT compte_supprimer FROM membre WHERE email=:email");
                         $del->bindParam(":email", $this->mail, PDO::PARAM_STR);
                         $del->execute();
                         $dele = $del->fetch();
@@ -218,7 +218,7 @@ class connexion
                     }
                     $requet_sql->closeCursor();
                 } else {
-                    $sql = $GLOBALS['bdd']->prepare("SELECT email FROM membre WHERE email =:mail");
+                    $sql = $GLOBALS['conn']->prepare("SELECT email FROM membre WHERE email =:mail");
                     $sql->bindParam(":mail", $this->mail, PDO::PARAM_STR);
                     $sql->execute();
                     $query = $sql->fetch();
