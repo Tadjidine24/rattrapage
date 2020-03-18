@@ -55,44 +55,10 @@
                 </table>
             <?php  }
             ?>
-            <form method="post" action="bienvenue.php">
-                <h2>Modifier:</h2>
-                <table>
-                    <tr>
-                        <td>Ancien mot de passe:</td>
-                        <td><input type="password" name="ancien_password" /></td>
-                    </tr>
-                    <tr>
-                        <td>Nouveau mot de passe:</td>
-                        <td><input type="password" name="new_password" /></td>
-                    </tr>
-                    <tr>
-                        <td>Confirmer nouveau mot de passe:</td>
-                        <td><input type="password" name="confirme_password" /></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="submit" /></td>
-                    </tr>
-                </table>
-                <?php
-                if (
-                    isset($_POST['ancien_password']) && isset($_POST['new_password'])
-                    && isset($_POST['confirme_password'])
-                ) {
-                    $password = new change_password(
-                        $_SESSION['mail'],
-                        ($_POST['ancien_password']),
-                        $_POST['new_password'],
-                        $_POST['confirme_password']
-                    );
-                    $password->password();
-                } ?>
 
-            </form>
         <?php } else {
             echo "Vous n'êtes pas connecté, accès impossible<br />
-               <a href='../index.php'>Se connecter</a>";
+               <a href='./login.php'>Se connecter</a>";
         }
         ?>
     </section>

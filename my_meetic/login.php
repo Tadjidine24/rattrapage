@@ -12,7 +12,7 @@
       <div class="backimage"> 
     <h1>Live Meetings</h1>
     <div class="form">
-      <form class="formulaire"  method="post" action="bienvenue.php" onsubmit="return validateForm()">
+      <form class="formulaire"  method="post" action="./bienvenue.php">
 
         <div class="block">
           <label class="label2" for="email">Email :</label>
