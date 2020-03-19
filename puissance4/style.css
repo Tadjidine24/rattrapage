@@ -1,0 +1,127 @@
+body {
+    text-align: center;
+    background-image: url(/home/tadjidine/Desktop/PROJET/puissance4/background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+  }
+  
+  #connect4 {
+    background-color: dodgerblue;
+    display: inline-block;
+    border-radius: 10%;
+    opacity: 0.8;
+  }
+  
+  .col {
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    background-color: white;
+    border-radius: 50%;
+    margin: 10px;
+  }
+
+  .col.empty {
+    cursor: pointer;
+  }
+  
+  .next-yellow {
+    background-color: yellow;
+  }
+  
+  .next-black {
+    background-color: black;
+  }
+  
+  .col.yellow {
+    background-color: black;
+  }
+  
+  .col.black {
+    background-color: yellow;
+  }
+
+button{
+      border-radius: 50%;
+      background-color: black;
+      border: solid yellow;
+      width: 80px;
+      height: 80px;
+      text-align: center;
+      float: right;
+}
+
+.button {
+text-align: center;
+cursor: pointer;
+padding: 1rem 3rem;
+display: inline-block;
+border-radius: 3px;
+margin: 1rem;
+text-decoration: none;
+font-size: 16px;
+text-transform: uppercase;
+color: #fff !important;
+background-image: linear-gradient(-45deg, #f761a1 0, #8c1bab 100%);
+box-shadow: 0 3px 13px 0 rgba(14, 9, 73, 0.2),
+0 11px 21px 0 rgba(255, 166, 220, 0.004);
+}
+/* @keyfr ames masuperanimation {
+    0% {
+        transform: translateY(-500px);
+    }
+
+    50% {
+        transform: translateY(-75px);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(30deg);
+    }
+}
+
+.col.black:hover
+{
+    animation: masuperanimation 5s; 
+} */
+
+/* body {
+    text-align: center;
+  }
+  
+  #connect4 {
+    background-color: yellow;
+    display: inline-block;
+  }
+  
+  .col {
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+  }
+  
+  .col.empty {
+    cursor: pointer;
+  }
+  
+  .next-yellow {
+    background-color: rgba(255, 0, 0, 0.2);
+  }
+  
+  .next-black {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .col.yellow {
+    background-color: yellow;
+  }
+  
+  .col.black {
+    background-color: black;
+  } */
