@@ -102,6 +102,93 @@ class Connect4 {
     });
   }
 
+  checkForWin(y, x, countY, posx, posy) 
+      {
+        vert(y, countY, posx);
+        horizontal(y, x, countY, posx, posy);
+      }
+
+      vert(y, num_y, posx) 
+      {
+        let vert = 0;
+        num_y--;
+        let color_data = $("[data-position='"+ num_y +"-"+ posx +"']").find("span").css("background-color");
+        for (let countY = num_y; countY < y; countY++) 
+        {
+          let color_data2 = $("[data-position='"+ countY +"-"+ posx +"']").find("span").css("background-color");
+          if (color_data === color_data2) 
+          {
+            vert++;
+            if (vert === 4) 
+            {
+              playing = !playing;
+              win();
+              return;
+            }
+          }
+          else 
+          {
+            return;
+          }
+        }
+      }
+
+      horizontal(y, x, num_y, posx, posy) 
+      {
+        let horizontal = 0;
+        num_y--;
+        x = (x - 1);
+        let color_dataH = $("[data-position='"+ num_y +"-"+ posx +"']").find("span").css("background-color");
+        for (let countX = posx; countX <= x; countX++) 
+        {
+          let color_data2H = $("[data-position='"+ num_y +"-"+ countX +"']").find("span").css("background-color");
+          if (color_dataH === color_data2H) 
+          {
+            horizontal++;
+            cur = $("[data-position='"+ num_y +"-"+ countX +"']").find("span")[0];
+            if (horizontal === 4) 
+            {
+              playing = !playing;
+              win();
+              return;
+            }
+            else 
+            {
+              vertical(countX, num_y);
+            }
+          }
+          else 
+          {
+            return;
+          }
+        }
+      }
+
+      vertical(num_x, num_y) 
+      {
+        let vertical = 0;
+        let color_dataHplus = $("[data-position='"+ num_y +"-"+ num_x + "']").find("span").css("background-color");
+        for (let countX = num_x; countX >= 0; countX--) 
+        {
+          let color_dataplusplus = $("[data-position='"+ num_y +"-"+ countX +"']").find("span").css("background-color");
+          if (color_dataplusplus === color_dataHplus) 
+          {
+            vertical++;
+            if  (vertical === 4) 
+            {
+              playing = !playing;
+              win();
+              return;
+            }
+          }
+          else 
+          {
+            vertical = 0;
+            return;
+          }
+        }
+      }
+
   restart() {
     this.Affichagedujeu();
     this.onJoueurMove();

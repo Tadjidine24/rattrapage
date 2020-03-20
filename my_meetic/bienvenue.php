@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="mon_css.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>My_meetic</title>
 </head>
 
@@ -18,7 +18,7 @@
 
         if (isset($_SESSION['mail'])) {
 
-            include "./recapitulatif_information.php";
+            include "recapitulatif_information.php";
 
             $recap = new information($_SESSION['mail']);
             $frite = $recap->return_information();
@@ -54,14 +54,6 @@
                     </tr>
                 </table>
             <?php  }
+            
+            }
             ?>
-
-        <?php } else {
-            echo "Vous n'êtes pas connecté, accès impossible<br />
-               <a href='./login.php'>Se connecter</a>";
-        }
-        ?>
-    </section>
-</body>
-
-</html>
